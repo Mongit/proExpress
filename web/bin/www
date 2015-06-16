@@ -14,9 +14,9 @@ var http = require('http');
 
 var port = normalizePort(process.env.PORT || '8080');
 app.set('port', port);
-app.set('appName', "Monse App");
+app.set('appName', app.get('env'));
 
-/**
+/**app.set('appName', "Monse App");
  * Create HTTP server.
  */
 
