@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cookies</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+   <form method="post"> 
+       <h1>Setea el valor de la cookie "galleta"</h1>
+        valor: <input type="text" name="valor"/>
+        <input type="submit" value="guardar"/>
+    </form> 
+      
+      req.cookies.galleta: <%= valor %>
+  </body>
+</html>
