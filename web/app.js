@@ -20,12 +20,16 @@ var busboy = require('connect-busboy');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var layout = require('./routes/layout');
+var urlPath = require('./routes/urlPath');
+var urlParams = require('./routes/urlParams');
 
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));//(variableName, pathToTheFolderWithTheTemplates)
+app.set('view engine', 'ejs');//(varName, templateFilenameExtention Or NPM library name/)
+
 
 app.set('x-powered-by', false);
 app.set('json spaces', 2);//Da identacion al json
@@ -88,7 +92,9 @@ app.use('/upload', busboy({immediate: true }));
 
 app.use('/', routes);
 app.use('/users', users);
-//app.use('/cookie', galleta);
+app.use('/layout', layout);
+app.use('/urlpath', urlPath);
+app.use('/urlparams', urlParams);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
