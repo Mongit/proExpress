@@ -12,9 +12,19 @@
           password: <input type="text" name="password"/>
          <input type="submit" name="guardar"/>
       </form>
-      <h2>QueryString</h2>
-      <div><%= username%> - <%= password%> </div>
-      <h2>UrlParams</h2>
-      <div><%= nombre%> - <%= apellido%> </div>
+      <div>
+          <h2>Query String</h2>
+          <%= username%> - <%= password%> 
+      </div>
+      <div>
+          <h2>Url Params</h2>
+          <%= nombre%> - <%= apellido%> 
+      </div>
+      
+      <div>
+          <h2>Nombre completo</h2>
+          <%= nombreCompleto%>
+      </div>
+      
   </body>
 </html>
