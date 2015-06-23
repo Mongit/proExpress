@@ -23,6 +23,7 @@ var users = require('./routes/users');
 var layout = require('./routes/layout');
 var urlPath = require('./routes/urlPath');
 var urlParams = require('./routes/urlParams');
+var reqObjects = require('./routes/reqObjects');
 
 var app = express();
 
@@ -46,7 +47,8 @@ app.use(compression({threshold: 1}));
 app.use(logger('dev'));//escribe una bitacora de lo q va pasando en el server(Morgan)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+//app.use(cookieParser());
+app.use(cookieParser('abc'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/img', express.static(__dirname + '/public/images'));
 app.use(error());
@@ -95,6 +97,7 @@ app.use('/users', users);
 app.use('/layout', layout);
 app.use('/urlpath', urlPath);
 app.use('/urlparams', urlParams);
+app.use('/search', reqObjects);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
