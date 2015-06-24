@@ -24,6 +24,7 @@ var layout = require('./routes/layout');
 var urlPath = require('./routes/urlPath');
 var urlParams = require('./routes/urlParams');
 var reqObjects = require('./routes/reqObjects');
+var resObjects = require('./routes/resObjects');
 
 var app = express();
 
@@ -98,6 +99,7 @@ app.use('/layout', layout);
 app.use('/urlpath', urlPath);
 app.use('/urlparams', urlParams);
 app.use('/search', reqObjects);
+app.use('/res', resObjects);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
