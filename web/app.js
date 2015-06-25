@@ -25,8 +25,12 @@ var urlPath = require('./routes/urlPath');
 var urlParams = require('./routes/urlParams');
 var reqObjects = require('./routes/reqObjects');
 var resObjects = require('./routes/resObjects');
+var myError = require('./routes/err');
 
-var app = express();
+var app = express(),
+    post = express(),
+    comment = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));//(variableName, pathToTheFolderWithTheTemplates)
@@ -93,6 +97,27 @@ app.use('/upload', busboy({immediate: true }));
 //app.use(logger('combined'));
 //app.use(express.static(__dirname + '/public'));
 
+//event listeners
+post.on('mount', function(parent) {
+    console.log(parent.mountpath);
+});
+comment.on('mount', function(parent) {//lanza un evento cuando comment, sea montada
+    console.log(parent.mountpath);
+});
+
+//aqui se montan ambos eventos
+app.use('/post', post);//post se monta en app
+post.use('/comment', comment);//comment se monta en post
+
+console.log("MountPath \n" + app.mountpath);
+console.log(post.mountpath);
+console.log(comment.mountpath);
+
+console.log("Path\n" + app.path());
+console.log(post.path());
+console.log(comment.path());
+
+
 app.use('/', routes);
 app.use('/users', users);
 app.use('/layout', layout);
@@ -100,6 +125,27 @@ app.use('/urlpath', urlPath);
 app.use('/urlparams', urlParams);
 app.use('/search', reqObjects);
 app.use('/res', resObjects);
+app.use('/myerror', myError);
+
+
+
+app.get('/appLocals', function(req, res, next) {
+    app.locals.lang = 'en';
+    app.locals.appName = 'MyName';
+/*    app.locals([
+        {author: 'Monse Jim'},
+        {email: 'hello@monse.co'},
+        {website: 'http://idontknowmyfriend.com'}
+        ]);
+*/    res.render('appProperties', {render: "method app.render"}, function(err, html)   {
+    if (err) return console.log(err);
+    console.log(html);
+    res.send(html);
+    });
+});
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -132,5 +178,8 @@ app.use(function(err, req, res, next) {
   });
 });
 
-
-module.exports = app;
+//module.exports = app; //corre con npm start, puerto 8080
+var port = 3000;//corre con $ node app.js, puerto 3000
+app.listen(port, function(){
+    console.log('The server is running, ' + ' please, open your browser at http://localhost:%s',port);
+});
