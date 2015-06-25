@@ -9,10 +9,10 @@ var debug = require('debug')('web:server');
 var http = require('http');
 
 //Crea variables globales
-//app.set('appName', app.get('env'));
-//app.set('port', port);
-//app.set('number', '5');
-//app.set('img', "Image not available :(");
+app.set('appName', app.get('env'));
+app.set('port', port);
+app.set('number', '5');
+app.set('img', "Image not available :(");
 
 
 /**app.set('appName', "Monse App");
